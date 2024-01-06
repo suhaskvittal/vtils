@@ -7,6 +7,8 @@
 
 #include <stdlib.h>
 
+namespace vtils {
+
 inline void handle_status(int s) {}
 
 inline CPXENVptr cpxinit() {
@@ -302,4 +304,6 @@ CPXLPManager<T>::get_sense(lp_constr_t con) {
         return 'E';
     }
 }
+
+}   // vtils
 

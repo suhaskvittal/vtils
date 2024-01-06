@@ -10,6 +10,8 @@
 
 #include <stddef.h>
 
+namespace vtils {
+
 struct lp_var_t {
     // Variable id:
     size_t  column;
@@ -55,9 +57,9 @@ struct lp_expr_t {
     lp_expr_t& operator*=(double);
     lp_expr_t& operator/=(double);
 
-    double constant;
     std::map<lp_var_t, double>      l_coefs;
     std::map<lp_quad_var_t, double> q_coefs;
+    double constant;
 
     template <class FUNC> void apply_vector_lambda(lp_expr_t, FUNC);
     template <class FUNC> void apply_scalar_lambda(FUNC);
@@ -101,6 +103,8 @@ struct lp_constr_t {
     double      rhs;
     direction   relation;
 };
+
+}   // vtils
 
 #include "variables.inl"
 #include "expressions.inl"

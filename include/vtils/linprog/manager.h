@@ -10,6 +10,8 @@
 
 #include <cplexx.h>
 
+namespace vtils {
+
 void handle_status(int);
 
 CPXENVptr   cpxinit(void);
@@ -58,6 +60,8 @@ private:
 
     double* prog_soln;
 };
+
+}   // vtils
 
 #include "manager.inl"
 

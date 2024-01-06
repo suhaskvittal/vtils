@@ -3,6 +3,8 @@
  *  date:   28 December 2023
  * */
 
+namespace vtils {
+
 inline bool
 lp_expr_t::is_quadratic() {
     return !q_coefs.empty();
@@ -69,4 +71,6 @@ lp_expr_t::apply_scalar_lambda(FUNC f) {
     for (auto& kv : l_coefs) kv.second = f(kv.second);
     for (auto& kv : q_coefs) kv.second = f(kv.second);
 }
+
+}   // vtils
 
