@@ -9,23 +9,23 @@
 #include <set>
 
 // Useful operator overloads:
-namespace vtils {
+namespace std {
 
-template <class T> std::set<T>  operator+(std::set<T>, std::set<T>)
-template <class T> std::set<T>  operator-(std::set<T>, std::set<T>)
-template <class T> std::set<T>  operator*(std::set<T>, std::set<T>)
-template <class T> std::set<T>  operator^(std::set<T>, std::set<T>)
+template <class T> set<T>  operator+(set<T>, set<T>);
+template <class T> set<T>  operator-(set<T>, set<T>);
+template <class T> set<T>  operator*(set<T>, set<T>);
+template <class T> set<T>  operator^(set<T>, set<T>);
 
-template <class T> std::set<T>& operator+=(std::set<T>&, std::set<T>);
-template <class T> std::set<T>& operator-=(std::set<T>&, std::set<T>);
-template <class T> std::set<T>& operator*=(std::set<T>&, std::set<T>);
-template <class T> std::set<T>& operator^=(std::set<T>&, std::set<T>);
+template <class T> set<T>& operator+=(set<T>&, set<T>);
+template <class T> set<T>& operator-=(set<T>&, set<T>);
+template <class T> set<T>& operator*=(set<T>&, set<T>);
+template <class T> set<T>& operator^=(set<T>&, set<T>);
 
-template <class T> std::set<T>& operator+=(std::set<T>&, T);
-template <class T> std::set<T>& operator-=(std::set<T>&, T);
-template <class T> std::set<T>& operator^=(std::set<T>&, T);
+template <class T> set<T>& operator+=(set<T>&, T);
+template <class T> set<T>& operator-=(set<T>&, T);
+template <class T> set<T>& operator^=(set<T>&, T);
 
-}   // vtils
+}   // std
 
 #include "set_algebra.inl"
 
