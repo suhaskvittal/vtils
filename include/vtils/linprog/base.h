@@ -3,8 +3,8 @@
  *  date:   28 December 2023
  * */
 
-#ifndef LINPROG_BASE_h
-#define LINPROG_BASE_h
+#ifndef VTILS_LINPROG_BASE_h
+#define VTILS_LINPROG_BASE_h
 
 #include <map>
 
@@ -111,4 +111,4 @@ struct lp_constr_t {
 #include "constraints.inl"
 #include "operations.inl"
 
-#endif  // LINPROG_BASE_h
+#endif  // VTILS_LINPROG_BASE_h

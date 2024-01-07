@@ -15,7 +15,7 @@ namespace vtils {
 template <size_t N>
 struct fixed_string {
     constexpr fixed_string(const char (&s)[N]) {
-        std::copy_n(str, N, value);
+        std::copy_n(s, N, value);
     }
 
     char value[N];

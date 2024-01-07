@@ -44,6 +44,7 @@ CPXLPManager<T>::CPXLPManager(CPXENVptr _env)
     label_to_lp_var(),
     env(_env),
     prog(NULL),
+    prog_type(problem_type::mip),
     prog_soln(NULL),
     env_is_initialized_by_object(_env == NULL)
 {

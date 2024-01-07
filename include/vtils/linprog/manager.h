@@ -3,10 +3,10 @@
  *  date:   28 December 2023
  * */
 
-#ifndef LINPROG_MANAGER_h
-#define LINPROG_MANAGER_h
+#ifndef VTILS_LINPROG_MANAGER_h
+#define VTILS_LINPROG_MANAGER_h
 
-#include "linprog/base.h"
+#include "vtils/linprog/base.h"
 
 #include <cplexx.h>
 
@@ -54,11 +54,12 @@ private:
 
     CPXENVptr env;
     CPXLPptr prog;
-    bool env_is_initialized_by_object;
 
     problem_type prog_type;
 
     double* prog_soln;
+
+    bool env_is_initialized_by_object;
 };
 
 }   // vtils
