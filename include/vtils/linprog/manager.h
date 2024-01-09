@@ -1,7 +1,3 @@
-/*
- *  author: Suhas Vittal
- *  date:   28 December 2023
- * */
 
 #ifndef VTILS_LINPROG_MANAGER_h
 #define VTILS_LINPROG_MANAGER_h
@@ -32,6 +28,7 @@ public:
     void solve_pool(void);
 
     lp_var_t    get_var(T);
+    double      get_value(lp_var_t);
     double      get_value(T);
 
     lp_var_t    add_slack_var(double lower_bound, double upper_bound, lp_var_t::bounds, lp_var_t::domain);

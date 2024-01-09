@@ -214,9 +214,8 @@ CPXLPManager<T>::solve(double* obj_p, int* solstat_p) {
         std::cerr << "CPXLPManager: unsupported problem type\n";
         return -1;
     }
-    std::cout << "opt status: " << status << "\n";
-    handle_status(status);
-
+    if (status) std::cerr << "CPXLPManager: CPXXmipopt status code = " << status << std::endl;
+    
     int fincols = CPXXgetnumcols(env, prog);
     if (prog_soln != NULL) free(prog_soln);
     prog_soln = reinterpret_cast<double*>(malloc(fincols * sizeof(double)));
@@ -234,6 +233,11 @@ CPXLPManager<T>::solve_pool() {
 template <class T> inline lp_var_t
 CPXLPManager<T>::get_var(T label) {
     return label_to_lp_var[label];
+}
+
+template <class T> inline double
+CPXLPManager<T>::get_value(lp_var_t x) {
+    return prog_soln[x.column];
 }
 
 template <class T> inline double
