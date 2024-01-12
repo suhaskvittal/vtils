@@ -6,47 +6,51 @@
 namespace vtils {
 
 inline bool
-CmdParser::option_set(std::string opt) {
+CmdParser::option_set(std::string opt, bool e) {
+    if (e && !option_pool.count(opt)) {
+        std::cerr << help << std::endl;
+        exit(1);
+    }
     return option_pool.count(opt); 
 }
 
 inline bool
-CmdParser::get_string(std::string opt, std::string& out) {
-    if (!option_set(opt))   return false;
+CmdParser::get_string(std::string opt, std::string& out, bool e) {
+    if (!option_set(opt, e))    return false;
     out = option_to_arg[opt]; 
     return true;
 }
 
 inline bool
-CmdParser::get_float(std::string opt, double& out) {
-    if (!option_set(opt))   return false;
+CmdParser::get_float(std::string opt, double& out, bool e) {
+    if (!option_set(opt, e))    return false;
     out = std::stof(option_to_arg[opt]); 
     return true;
 }
 
 inline bool
-CmdParser::get_int32(std::string opt, int32_t& out) {
-    if (!option_set(opt))   return false;
+CmdParser::get_int32(std::string opt, int32_t& out, bool e) {
+    if (!option_set(opt, e))    return false;
     out = std::stoi(option_to_arg[opt]);
     return true;
 }
 
 inline bool
-CmdParser::get_int64(std::string opt, int64_t& out) {
-    if (!option_set(opt))   return false;
+CmdParser::get_int64(std::string opt, int64_t& out, bool e) {
+    if (!option_set(opt, e))    return false;
     out = std::stoll(option_to_arg[opt]); 
     return true;
 }
 
 inline bool
-CmdParser::get_uint32(std::string opt, uint32_t& out) {
-    if (!option_set(opt))   return false;
+CmdParser::get_uint32(std::string opt, uint32_t& out, bool e) {
+    if (!option_set(opt, e))    return false;
     out = std::stoul(option_to_arg[opt]); 
     return true;
 }
 inline bool
-CmdParser::get_uint64(std::string opt, uint64_t& out) {
-    if (!option_set(opt))   return false;
+CmdParser::get_uint64(std::string opt, uint64_t& out, bool e) {
+    if (!option_set(opt, e))    return false;
     out = std::stoull(option_to_arg[opt]); 
     return true;
 }

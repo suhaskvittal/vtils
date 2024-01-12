@@ -46,6 +46,8 @@ public:
 
     BijectiveMap reverse(void);
 
+    inline void clear(void) { forward_map.clear(); reverse_map.clear(); }
+
     // Pretty much all the functions below are wrappers for std::map.
     
     // Returns false if change is not bijective.
