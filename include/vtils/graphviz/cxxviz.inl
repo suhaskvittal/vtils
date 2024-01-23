@@ -32,7 +32,7 @@ cxx_agset(AGPTR ax, std::string attr_name, std::string attr_value) {
     char c_value[1024];
     copy_cxx_string_to_buffer(attr_name, c_name);
     copy_cxx_string_to_buffer(attr_value, c_value);
-    agset(ax, c_name, c_value);
+    agsafeset(ax, c_name, c_value, "");
 }
 
 inline void
