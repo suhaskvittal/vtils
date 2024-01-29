@@ -17,6 +17,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(VTILS_SOURCE_FILES 
     src/vtils/cmd_parse.cpp
     src/vtils/filesystem.cpp
+    src/vtils/ini_parse.cpp
     src/vtils/linprog/base.cpp)
 
 add_library(vtils ${VTILS_SOURCE_FILES})

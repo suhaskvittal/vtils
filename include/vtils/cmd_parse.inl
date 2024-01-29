@@ -6,7 +6,7 @@
 namespace vtils {
 
 inline bool
-CmdParser::option_set(std::string opt, bool e) {
+CmdParser::option_set(std::string opt, bool e) const {
     if (e && !option_pool.count(opt)) {
         std::cerr << help << std::endl;
         exit(1);
@@ -15,52 +15,26 @@ CmdParser::option_set(std::string opt, bool e) {
 }
 
 inline bool
-CmdParser::get_string(std::string opt, std::string& out, bool e) {
-    if (!option_set(opt, e))    return false;
-    out = option_to_arg[opt]; 
+CmdParser::get(std::string opt, std::string& out, bool e) const {
+    if (!option_set(opt, e)) return false;
+    out = option_to_arg.at(opt); 
     return true;
 }
 
-inline bool
-CmdParser::get_float(std::string opt, double& out, bool e) {
-    if (!option_set(opt, e))    return false;
-    out = std::stof(option_to_arg[opt]); 
-    return true;
-}
-
-inline bool
-CmdParser::get_int32(std::string opt, int32_t& out, bool e) {
-    if (!option_set(opt, e))    return false;
-    out = std::stoi(option_to_arg[opt]);
-    return true;
-}
-
-inline bool
-CmdParser::get_int64(std::string opt, int64_t& out, bool e) {
-    if (!option_set(opt, e))    return false;
-    out = std::stoll(option_to_arg[opt]); 
-    return true;
-}
-
-inline bool
-CmdParser::get_uint32(std::string opt, uint32_t& out, bool e) {
-    if (!option_set(opt, e))    return false;
-    out = std::stoul(option_to_arg[opt]); 
-    return true;
-}
-inline bool
-CmdParser::get_uint64(std::string opt, uint64_t& out, bool e) {
-    if (!option_set(opt, e))    return false;
-    out = std::stoull(option_to_arg[opt]); 
+template <class T> inline bool
+CmdParser::get(std::string opt, T& out, bool e) const {
+    std::string tmp;
+    if (!get(opt, tmp, e)) return false;
+    out = conv<T>(tmp);
     return true;
 }
 
 inline void
-CmdParser::print_all_set_options(std::ostream& out) {
+CmdParser::print_all_set_options(std::ostream& out) const {
     for (std::string opt : option_pool) {
         out << opt;
         if (option_to_arg.count(opt)) {
-            out << ": " << option_to_arg[opt];
+            out << ": " << option_to_arg.at(opt);
         }
         out << "\n";
     }
