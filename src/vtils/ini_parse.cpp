@@ -44,16 +44,8 @@ IniParser::parse(std::ifstream& fin) {
 
             bool escape_set_on_this_char = false;
             if (!escape_set && !in_quote) {
-                if (c == ' ' || c == '\t') {
+                if (!in_section_header && (c == ' ' || c == '\t')) {
                     continue;
-                } else if (c == '\n') {
-                    // End of line -- need to handle based on set flags.
-                    if (in_value) {
-                        ini_map[curr_section][curr_key] = std::move(token);
-                    } else if (in_comment) {
-                        in_comment = false;
-                    }
-                    token.clear();
                 } else if (c == ';' || c == '#') {
                     in_comment = true;
                 } else if (c == '\\') {
@@ -72,15 +64,30 @@ IniParser::parse(std::ifstream& fin) {
                     token.clear();
                 } else if (c == '\"' || c == '\'') {
                     in_quote = true;
+                } else {
+                    token.push_back(c);
                 }
             } else if (!escape_set && in_quote) {
                 if (c == '\"' || c == '\'') {
                     in_quote = false;
+                } else {
+                    token.push_back(c);
                 }
             } else {
                 token.push_back(c);
             }
             escape_set = escape_set_on_this_char;
+        }
+        // Now that we are done with the line, handle anything remaining.
+        if (!escape_set && !in_quote) {
+            if (in_value) {
+                ini_map[curr_section][curr_key] = std::move(token);
+            } else if (in_comment) {
+                in_comment = false;
+            }
+            token.clear();
+        } else {
+            token.push_back('\n');
         }
     }
 }
