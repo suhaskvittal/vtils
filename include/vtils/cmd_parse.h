@@ -24,7 +24,7 @@ public:
     bool    option_set(std::string, bool exit_on_fail=false) const;
     bool    get(std::string, std::string&, bool exit_on_fail=false) const;
 
-    template <class T> bool             get(std::string, T&, bool exit_on_fail=false) const;
+    template <class T> bool get(std::string, T&, bool exit_on_fail=false) const;
     
     void print_all_set_options(std::ostream&) const;
 
