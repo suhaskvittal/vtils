@@ -24,6 +24,4 @@ std::string get_basename(std::string);
 
 }   // vtils
 
-#include "filesystem.inl"
-
 #endif  // VTILS_FILESYSTEM_h

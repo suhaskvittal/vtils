@@ -291,7 +291,7 @@ template <class T> inline double
 CPXLPManager<T>::fetch_soln_from_pool(size_t k) {
     int fincols = CPXXgetnumcols(env, prog);
     if (prog_soln != NULL)  free(prog_soln);
-    prog_soln = reinterpret_cast<double>(malloc(fincols * sizeof(double)));
+    prog_soln = reinterpret_cast<double*>(malloc(fincols * sizeof(double)));
 
     double obj;
     handle_status(CPXXgetsolnpoolobjval(env, prog, k, &obj));

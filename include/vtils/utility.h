@@ -30,6 +30,6 @@ void insert_all(SET_LIKE&, std::initializer_list<T>);
 
 }   // vtils
 
-#include "utility.inl"
+#include "inl/utility.inl"
 
 #endif  // VTILS_UTILITY_h

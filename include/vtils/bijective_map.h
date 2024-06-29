@@ -108,6 +108,6 @@ private:
 
 }   // vtils
 
-#include "bijective_map.inl"
+#include "inl/bijective_map.inl"
 
 #endif  // DEFS_BIJECTIVE_MAP_h

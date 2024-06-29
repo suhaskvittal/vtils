@@ -27,6 +27,6 @@ template <class T> set<T>& operator^=(set<T>&, T);
 
 }   // std
 
-#include "set_algebra.inl"
+#include "inl/set_algebra.inl"
 
 #endif  // VTILS_SET_ALGEBRA_h

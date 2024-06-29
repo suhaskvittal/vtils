@@ -31,6 +31,4 @@ private:
 
 }
 
-#include "timer.inl"
-
 #endif  // VTILS_TIMER_h

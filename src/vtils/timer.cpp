@@ -3,9 +3,11 @@
  *  date:   25 December 2023
  * */
 
+#include "vtils/timer.h"
+
 namespace vtils {
 
-inline void 
+void 
 Timer::clk_start() {
 #ifdef __APPLE__
     t_start = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);
@@ -14,7 +16,7 @@ Timer::clk_start() {
 #endif
 }
 
-inline uint64_t
+uint64_t
 Timer::clk_end() {
 #ifdef __APPLE__
     auto t_end = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW);

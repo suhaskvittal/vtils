@@ -106,9 +106,9 @@ struct lp_constr_t {
 
 }   // vtils
 
-#include "variables.inl"
-#include "expressions.inl"
-#include "constraints.inl"
-#include "operations.inl"
+#include "inl/base/variables.inl"
+#include "inl/base/expressions.inl"
+#include "inl/base/constraints.inl"
+#include "inl/base/operations.inl"
 
 #endif  // VTILS_LINPROG_BASE_h

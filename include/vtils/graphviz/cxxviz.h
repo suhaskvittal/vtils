@@ -21,6 +21,6 @@ void    cxx_agset(AGPTR, std::string, std::string);
 
 void    copy_cxx_string_to_buffer(std::string, char*);
 
-#include "cxxviz.inl"
+#include "inl/cxxviz.inl"
 
 #endif  // QONTRA_CXX_GRAPHVIZ_h

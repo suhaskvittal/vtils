@@ -22,6 +22,6 @@ T conv(std::string);
 
 }   // vtils
 
-#include "type_conv.inl"
+#include "inl/type_conv.inl"
 
 #endif  // VTILS_TYPE_CONV_h

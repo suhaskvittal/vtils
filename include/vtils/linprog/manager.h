@@ -61,6 +61,6 @@ private:
 
 }   // vtils
 
-#include "manager.inl"
+#include "inl/manager.inl"
 
 #endif  // LINPROG_MANAGER_h

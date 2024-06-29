@@ -36,6 +36,6 @@ private:
 
 }   // vtils
 
-#include "cmd_parse.inl"
+#include "inl/cmd_parse.inl"
 
 #endif  // VTILS_CMD_PARSE_h

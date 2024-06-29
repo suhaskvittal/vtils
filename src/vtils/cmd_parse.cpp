@@ -33,4 +33,31 @@ CmdParser::CmdParser(int argc, char* argv[], int from)
     }
 }
 
+bool
+CmdParser::option_set(std::string opt, bool e) const {
+    if (e && !option_pool.count(opt)) {
+        std::cerr << help << std::endl;
+        exit(1);
+    }
+    return option_pool.count(opt); 
+}
+
+bool
+CmdParser::get(std::string opt, std::string& out, bool e) const {
+    if (!option_set(opt, e)) return false;
+    out = option_to_arg.at(opt); 
+    return true;
+}
+
+void
+CmdParser::print_all_set_options(std::ostream& out) const {
+    for (std::string opt : option_pool) {
+        out << opt;
+        if (option_to_arg.count(opt)) {
+            out << ": " << option_to_arg.at(opt);
+        }
+        out << "\n";
+    }
+}
+
 }   // vtils
