@@ -18,6 +18,7 @@ set(VTILS_SOURCE_FILES
     src/vtils/cmd_parse.cpp
     src/vtils/filesystem.cpp
     src/vtils/ini_parse.cpp
+    src/vtils/mat2.cpp
     src/vtils/timer.cpp
     src/vtils/linprog/base.cpp)
 

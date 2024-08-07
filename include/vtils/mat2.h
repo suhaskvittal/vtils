@@ -3,6 +3,7 @@
  *  date:   29 June 2024
  * */
 
+#include <iostream>
 #include <vector>
 
 #include <stdint.h>
@@ -17,21 +18,26 @@ public:
     Mat2(const Mat2&);
     ~Mat2(void);
 
+    static Mat2 from_rows(std::vector<Mat2>);
+
     bool get(size_t, size_t) const;
     void set(size_t, size_t, bool);
+
+    void set_row(size_t, Mat2);
+    void copy_rows_from(size_t ri, Mat2 from);
+    void copy_rows_from(size_t ri, std::vector<Mat2>);
 
     Mat2 get_row(size_t) const;
     Mat2 get_col(size_t) const;
 
     Mat2 rref(std::vector<size_t>& pivots) const;
+    size_t popcount(size_t row) const;
+    Mat2 append_row(Mat2) const;
 
     Mat2 tr(void) const;
     const Mat2& trr(void) const;
 
     bool operator()(size_t, size_t) const;
-
-    Mat2& operator+(Mat2);
-    Mat2& operator*(Mat2);
 
     const size_t n_rows;
     const size_t n_cols;
@@ -48,13 +54,18 @@ private:
 
     friend Mat2 operator+(Mat2, Mat2);
     friend Mat2 operator*(Mat2, Mat2);
+    friend Mat2 operator&(Mat2, Mat2);
     friend Mat2 _rref(const Mat2&, std::vector<size_t>&);
 };
 
+std::ostream& operator<<(std::ostream&, Mat2);
+
 Mat2 operator+(Mat2, Mat2);
 Mat2 operator*(Mat2, Mat2);
+Mat2 operator&(Mat2, Mat2);
 
 std::vector<Mat2>   get_basis_vectors(const Mat2&);
+std::vector<Mat2>   get_null_basis_vectors(const Mat2&);
 size_t              rk(const Mat2&);
 
 
