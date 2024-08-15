@@ -3,6 +3,9 @@
  *  date:   29 June 2024
  * */
 
+#ifndef VTILS_MAT2_h
+#define VTILS_MAT2_h
+
 #include <iostream>
 #include <vector>
 
@@ -76,3 +79,5 @@ size_t              rk(const Mat2&);
 Mat2 _rref(const Mat2&, std::vector<size_t>&);
 
 }   // vtils
+
+#endif
