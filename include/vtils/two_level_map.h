@@ -6,11 +6,12 @@
 #ifndef VTILS_TWO_LEVEL_MAP_h
 #define VTILS_TWO_LEVEL_MAP_h
 
-#include <map>
+#include <unordered_map>
 
 namespace vtils {
 
-template <class T, class U, class V> using TwoLevelMap = std::map<T, std::map<U, V>>;
+template < class T, class U, class V, template<class,class> class MAP_TYPE=std::unordered_map >
+using TwoLevelMap = MAP_TYPE<T, MAP_TYPE<U, V>>;
 
 template <class T, class U, class V> inline void
 tlm_put(TwoLevelMap<T, U, V>& m, T x, U y, V z) {

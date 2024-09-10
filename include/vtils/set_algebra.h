@@ -6,26 +6,19 @@
 #ifndef VTILS_SET_ALGEBRA_h
 #define VTILS_SET_ALGEBRA_h
 
-#include <set>
+namespace vtils {
 
-// Useful operator overloads:
-namespace std {
+template <class SET_TYPE> SET_TYPE immd_set_union(SET_TYPE, SET_TYPE);
+template <class SET_TYPE> SET_TYPE immd_set_diff(SET_TYPE, SET_TYPE);
+template <class SET_TYPE> SET_TYPE immd_set_intersect(SET_TYPE, SET_TYPE);
+template <class SET_TYPE> SET_TYPE immd_set_symdiff(SET_TYPE, SET_TYPE);
 
-template <class T> set<T>  operator+(set<T>, set<T>);
-template <class T> set<T>  operator-(set<T>, set<T>);
-template <class T> set<T>  operator*(set<T>, set<T>);
-template <class T> set<T>  operator^(set<T>, set<T>);
+template <class SET_TYPE> SET_TYPE& upd_set_union(SET_TYPE&, SET_TYPE);
+template <class SET_TYPE> SET_TYPE& upd_set_diff(SET_TYPE&, SET_TYPE);
+template <class SET_TYPE> SET_TYPE& upd_set_intersect(SET_TYPE&, SET_TYPE);
+template <class SET_TYPE> SET_TYPE& upd_set_symdiff(SET_TYPE&, SET_TYPE);
 
-template <class T> set<T>& operator+=(set<T>&, set<T>);
-template <class T> set<T>& operator-=(set<T>&, set<T>);
-template <class T> set<T>& operator*=(set<T>&, set<T>);
-template <class T> set<T>& operator^=(set<T>&, set<T>);
-
-template <class T> set<T>& operator+=(set<T>&, T);
-template <class T> set<T>& operator-=(set<T>&, T);
-template <class T> set<T>& operator^=(set<T>&, T);
-
-}   // std
+}   // vtils
 
 #include "inl/set_algebra.inl"
 

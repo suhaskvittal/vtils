@@ -6,20 +6,20 @@
 #ifndef VTILS_BIJECTIVE_MAP_h
 #define VTILS_BIJECTIVE_MAP_h
 
-#include <map>
+#include <unordered_map>
 #include <type_traits>
 
 namespace vtils {
 
-template <class T, class U> 
-std::map<U, T> get_reverse_map(const std::map<T, U>&);
+template <class T, class U, template<class,class> class MAP_TYPE> 
+MAP_TYPE<U, T> get_reverse_map(const MAP_TYPE<T, U>&);
 
 // This is for the common situation where you just need to label something
 // with another thing. This class enforces bijectivity.
 
 #define TYPE_ASSERT(fn) static_assert(!std::is_same<T, U>::value, "function #fn is undefined if T = U.")
 
-template <class T, class U>
+template < class T, class U, template<class,class> class MAP_TYPE=std::unordered_map >
 class BijectiveMap {
 public:
     BijectiveMap()
@@ -27,7 +27,7 @@ public:
         reverse_map()
     {}
 
-    BijectiveMap(const std::map<T, U>& orig)
+    BijectiveMap(const MAP_TYPE<T, U>& orig)
         :forward_map(orig),
         reverse_map(get_reverse_map(orig))
     {}
@@ -48,7 +48,7 @@ public:
 
     inline void clear(void) { forward_map.clear(); reverse_map.clear(); }
 
-    // Pretty much all the functions below are wrappers for std::map.
+    // Pretty much all the functions below are wrappers for MAP_TYPE.
     
     // Returns false if change is not bijective.
     inline bool put(T key, U value) { TYPE_ASSERT("put"); return f_put(key, value); }
@@ -86,24 +86,24 @@ public:
     void r_swap(U, U);
 
     // Other functions:
-    inline std::map<T, U>::iterator begin() { return forward_map.begin(); }
-    inline std::map<T, U>::const_iterator cbegin() const { return forward_map.cbegin(); }
-    inline std::map<T, U>::iterator end() { return forward_map.end(); }
-    inline std::map<T, U>::const_iterator cend() const { return forward_map.cend(); }
+    inline MAP_TYPE<T, U>::iterator begin() { return forward_map.begin(); }
+    inline MAP_TYPE<T, U>::const_iterator cbegin() const { return forward_map.cbegin(); }
+    inline MAP_TYPE<T, U>::iterator end() { return forward_map.end(); }
+    inline MAP_TYPE<T, U>::const_iterator cend() const { return forward_map.cend(); }
 
     inline size_t size(void) { return forward_map.size(); }
 
     bool assert_bijectivity = true;
 private:
-    static BijectiveMap from_maps(const std::map<T, U>& fwd, const std::map<U, T>& rev) {
+    static BijectiveMap from_maps(const MAP_TYPE<T, U>& fwd, const MAP_TYPE<U, T>& rev) {
         BijectiveMap bmap;
         bmap.forward_map = fwd;
         bmap.reverse_map = rev;
         return bmap;
     }
 
-    std::map<T, U> forward_map;
-    std::map<U, T> reverse_map;
+    MAP_TYPE<T, U> forward_map;
+    MAP_TYPE<U, T> reverse_map;
 };
 
 }   // vtils

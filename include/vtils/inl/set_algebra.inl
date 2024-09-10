@@ -3,77 +3,55 @@
  *  date:   25 December 2023
  * */
 
-#include <algorithm>
+namespace vtils {
 
-namespace std {
+template <class SET_TYPE> inline SET_TYPE
+immd_set_union(SET_TYPE s1, SET_TYPE s2) {
+    for (const auto& x : s2) s1.insert(x);
+    return s1;
+}
 
-template <class T> inline set<T>
-operator+(set<T> s1, set<T> s2) {
-    set<T> s3;
-    set_union(s1.begin(),
-                    s1.end(),
-                    s2.begin(),
-                    s2.end(),
-                    inserter(s3, s3.begin()));
+template <class SET_TYPE> inline SET_TYPE
+immd_set_diff(SET_TYPE s1, SET_TYPE s2) {
+    for (const auto& x : s2) s1.erase(x);
+    return s1;
+}
+
+template <class SET_TYPE> inline SET_TYPE
+immd_set_intersect(SET_TYPE s1, SET_TYPE s2) {
+    SET_TYPE s3;
+    for (const auto& x : s1) {
+        if (s2.count(x)) {
+            s3.insert(x);
+        }
+    }
     return s3;
 }
 
-template <class T> inline set<T>
-operator-(set<T> s1, set<T> s2) {
-    set<T> s3;
-    set_difference(s1.begin(),
-                        s1.end(),
-                        s2.begin(),
-                        s2.end(),
-                        inserter(s3, s3.begin()));
+template <class SET_TYPE> inline SET_TYPE
+immd_set_symdiff(SET_TYPE s1, SET_TYPE s2) {
+    SET_TYPE s3;
+    for (const auto& x : s1) {
+        if (!s2.count(x)) {
+            s3.insert(x);
+        } else {
+            s2.erase(x);
+        }
+    }
+    upd_set_union(s3,s2);
     return s3;
 }
 
-template <class T> inline set<T>
-operator*(set<T> s1, set<T> s2) {
-    set<T> s3;
-    set_intersection(s1.begin(),
-                            s1.end(),
-                            s2.begin(),
-                            s2.end(),
-                            inserter(s3, s3.begin()));
-    return s3;
-}
+template <class SET_TYPE> inline SET_TYPE&
+upd_set_union(SET_TYPE& s1, SET_TYPE s2) { s1 = immd_set_union(s1,s2); return s1; }
 
-template <class T> inline set<T>
-operator^(set<T> s1, set<T> s2) {
-    set<T> s3;
-    set_symmetric_difference(s1.begin(),
-                                    s1.end(),
-                                    s2.begin(),
-                                    s2.end(),
-                                    inserter(s3, s3.begin()));
-    return s3;
-}
+template <class SET_TYPE> inline SET_TYPE&
+upd_set_diff(SET_TYPE& s1, SET_TYPE s2) { s1 = immd_set_diff(s1,s2); return s1; }
 
-template <class T> inline set<T>&
-operator+=(set<T>& s1, set<T> s2) { s1 = s1 + s2; return s1; }
+template <class SET_TYPE> inline SET_TYPE&
+upd_set_intersect(SET_TYPE& s1, SET_TYPE s2) { s1 = immd_set_intersect(s1,s2); return s1; }
 
-template <class T> inline set<T>&
-operator-=(set<T>& s1, set<T> s2) { s1 = s1 - s2; return s1; }
+template <class SET_TYPE> inline SET_TYPE&
+upd_set_symdiff(SET_TYPE& s1, SET_TYPE s2) { s1 = immd_set_symdiff(s1,s2); return s1; }
 
-template <class T> inline set<T>&
-operator*=(set<T>& s1, set<T> s2) { s1 = s1 * s2; return s1; }
-
-template <class T> inline set<T>&
-operator^=(set<T>& s1, set<T> s2) { s1 = s1 ^ s2; return s1; }
-
-template <class T> inline set<T>&
-operator+=(set<T>& s, T x) { s.insert(x); return s; }
-
-template <class T> inline set<T>&
-operator-=(set<T>& s, T x) { s.erase(x); return s; }
-
-template <class T> inline set<T>&
-operator^=(set<T>& s, T x) { 
-    if (s.count(x)) s.erase(x);
-    else            s.insert(x);
-    return s;
-}
-
-}   // std
+}   // vtils
